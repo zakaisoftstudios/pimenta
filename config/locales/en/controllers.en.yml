@@ -1,0 +1,11 @@
+en:
+  controllers:
+    api:
+      v1:
+        facebook_user:
+          not_found: 'Facebook user not found'
+        user_token:
+          email_not_confimed: Email not confirmed
+          invalid_credentials: Invalid credentials
+        password_resets:
+          not_found: User not found hu

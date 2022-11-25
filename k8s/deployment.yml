@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: backend-rails
+  labels:
+    name: backend-rails
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: backend-rails
+    spec:
+      containers:
+        - name: backend-rails
+          image: ##image## 
+          #image: gcr.io/pimenta-success/nextstep_backend_rails:latest 
+          ports:
+            - containerPort: 3003
+          livenessProbe:
+            httpGet:
+              path: /v1/pings/
+              port: 3003
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: /v1/pings/
+              port: 3003
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+          env:
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: backend-rails-secrets
+                  key: secret_key_base
+            - name: RACK_ENV
+              valueFrom:
+                secretKeyRef:
+                  name: backend-rails-secrets
+                  key: rack_env

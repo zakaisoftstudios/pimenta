@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: backend-rails
+spec:
+  ports:
+  - name: http
+    port: 3003
+    targetPort: 3003
+    protocol: TCP
+  selector:
+    name: backend-rails

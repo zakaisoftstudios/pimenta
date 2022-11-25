@@ -1,0 +1,26 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: backend-rails
+  labels:
+    traffic-type: external
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefix
+spec:
+  rules:
+  - host: c2su-api-dev.g.pimenta.cloud
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: backend-rails
+          servicePort: http
+  - host: c2su-dev.g.pimenta.cloud
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: frontend-react
+          servicePort: http

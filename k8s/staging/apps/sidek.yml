@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nextstep-sideqik
+  labels:
+    name: nextstep-sideqik
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: nextstep-sideqik
+    spec:
+      containers:
+        - name: backend-rails
+          image: gcr.io/pimenta-success/nextstep_backend_rails_sidekiq:develop
+          ports:
+            - containerPort: 3003
+          env:
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: backend-rails-secrets
+                  key: secret_key_base
+            - name: RACK_ENV
+              valueFrom:
+                secretKeyRef:
+                  name: backend-rails-secrets
+                  key: rack_env
+            - name: FRONTEND_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: backend-rails-secrets
+                  key: frontend-host
+            - name: SENDGRID_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: backend-rails-secrets
+                  key: sendgridapikey
+

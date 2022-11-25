@@ -1,0 +1,29 @@
+de:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: muss eingertragen werden
+              invalid: falsche Format
+        student_profile:
+          attributes:
+            student_profile_skills:
+              too_long: '- Du darfst maximal 5 auswählen'
+              too_short: '- Du musst mindestens 1 auswählen'
+            student_profile_interests:
+              too_long: '- Du darfst maximal 5 auswählen'
+              too_short: '- Du musst mindestens 1 auswählen'
+            student_profile_strengths:
+              too_long: '- Du darfst maximal 5 auswählen'
+              too_short: '- Du musst mindestens 1 auswählen'
+            certificates:
+              too_long: '- Du kannst maximal 5 Zertifikate hochladen'
+  validators:
+    attachments:
+      must_have_maximum: wichtig muss maximal sein %{max_size} %{purpose}
+    qualities:
+      unique: '- Auswahl zwischen wichtig und zusätzlich darf nicht gleich sein'
+      must_have: '- Wähle zwichen 1 und 5 wichtigine Eigenschaften aus'
+      can_have: '- Wähle maximal 5 zusätzliche Eigenschaften aus'

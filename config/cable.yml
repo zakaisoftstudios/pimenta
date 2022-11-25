@@ -1,0 +1,14 @@
+default: &default
+  adapter: redis
+  url: redis://redis:6379/1
+
+development:
+  <<: *default
+  channel_prefix: nextstep_development
+
+test:
+  adapter: async
+
+production:
+  <<: *default
+  channel_prefix: nextstep_production

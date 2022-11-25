@@ -1,0 +1,69 @@
+version: '2.1'
+services:
+  web:
+    image: 986756292145.dkr.ecr.eu-central-1.amazonaws.com/nextstep-backend:$DOCKER_TAG
+    ports:
+      - '$BACKEND_PORT_MAIN:3003'
+      - '$BACKEND_PORT_1234:1234'
+      - '$BACKEND_PORT_26162:26162'
+    depends_on:
+      - postgres
+    environment:
+      - RACK_ENV
+      - SECRET_KEY_BASE
+      - RUBY_DEBUG_PORT=1234
+      - FRONTEND_HOST
+      - SENDGRID_API_KEY
+      - DATABASE_HOST
+      - DATABASE_USER
+      - DATABASE_NAME
+      - DATABASE_PASSWORD
+
+  postgres:
+    image: postgres:9.6
+    volumes:
+      - ./data/postgres/data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: $DATABASE_USER
+      POSTGRES_DB: $DATABASE_NAME
+      POSTGRES_PASSWORD: $DATABASE_PASSWORD
+
+  elasticsearch:
+    image: 986756292145.dkr.ecr.eu-central-1.amazonaws.com/nextstep-elasticsearch:6.5.4
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - 'ES_JAVA_OPTS=-Xms1024m -Xmx1024m'
+      - xpack.security.enabled=false
+      - xpack.monitoring.enabled=false
+      - xpack.graph.enabled=false
+      - xpack.watcher.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./data/elasticsearch/data:/usr/share/elasticsearch/data
+
+  redis:
+    image: 'redis:4.0-alpine'
+    command: redis-server
+    volumes:
+      - './data/redis/data:/data'
+
+  sidekiq:
+    depends_on:
+      - 'postgres'
+      - 'redis'
+    image: 986756292145.dkr.ecr.eu-central-1.amazonaws.com/nextstep-sidekiq:$DOCKER_TAG
+    command: bundle exec sidekiq -q default -q mailers --environment ${RACK_ENV:-development}
+    environment:
+      - RACK_ENV
+      - SECRET_KEY_BASE
+      - RUBY_DEBUG_PORT=1234
+      - FRONTEND_HOST
+      - SENDGRID_API_KEY
+      - DATABASE_HOST
+      - DATABASE_USER
+      - DATABASE_NAME
+      - DATABASE_PASSWORD

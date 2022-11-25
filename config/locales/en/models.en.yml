@@ -1,0 +1,29 @@
+en:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: must be informed
+              invalid: has invalid format
+        student_profile:
+          attributes:
+            student_profile_skills:
+              too_long: '- you can choose at most five'
+              too_short: '- you must choose at least one'
+            student_profile_interests:
+              too_long: '- you can choose at most five'
+              too_short: '- you must choose at least one'
+            student_profile_strengths:
+              too_long: '- you can choose at most five'
+              too_short: '- you must choose at least one'
+            certificates:
+              too_long: '- pick up max five'
+  validators:
+    attachments:
+      must_have_maximum: must have on maximum %{max_size} %{purpose}
+    qualities:
+      unique: '- items must be unique between must have and can have'
+      must_have: '- pick up from one to five must have'
+      can_have: '- pick up five can have at most'

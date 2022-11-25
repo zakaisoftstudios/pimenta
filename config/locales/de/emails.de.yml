@@ -1,0 +1,50 @@
+de:
+  emails:
+    confirmation_email:
+      hi: 'Hi %{user_name},'
+      main_message: 'Herzlich Willkommen. Wir freuen uns, dass du dich für click to success entschieden hast. Da wir neben Innovation auch für Transparenz stehen, möchten wir dich bitten, deine E-Mail Adresse auf dem Link unten zu bestätigen. Direkt danach kannst du dein Profil erstellen und loslegen. C2su wird umso besser, je mehr Menschen auf der Seite angemeldet sind. Also empfehle uns weiter und werde Teil eines bedeutenden Netzwerks.'
+      link_text: 'Hier klicken'
+      subject: 'C2su Account Bestätigung'
+      welcome: Willkommen
+    new_conversation_email:
+      hi: 'Hi %{user_name},'
+      main_message: 'Du hast einen neuen Chat mit %{partner_name}'
+      link_text: 'Klicke hier, um direkt zu schreiben'
+      subject: 'Ein neuer Chat auf c2su hat sich für dich geöffnet'
+    new_message_email:
+      hi: 'Hi %{receiver_name},'
+      main_message: '%{sender_name} hat dir eine neue Nachricht geschrieben.'
+      message_content: 'Nachricht: "%{message}"'
+      link_text: 'Klicke hier, um direkt in den Chat zu kommen'
+      subject: 'Du hast eine neue Nachricht im Chat auf c2su'
+    password_reset_email:
+      hi: 'Hi %{user_name},'
+      main_message: 'Du erhältst diese E-Mail weil du dein Passwort vergessenhast. Klicke auf den untenstehenden Link, um in wenigen Schritten ein neues Passwort zu bekommen.'
+      link_text: 'Klick hier'
+      subject: 'Anfrage Passwort zurücksetzen c2su'
+      title: Passwort Zurücksetzen
+    password_updated_email:
+      hi: 'Hi %{user_name},'
+      main_message: 'Dein Passwort wurde erfolgreich zurückgesetzt.'
+      subject: 'c2su Passwort Zurücksetzen'
+      title: Passwort Aktualisierung
+    email_general:
+      team: C2SU Team
+    contact_email:
+      subject: You have a new message from c2su.de website
+      title: '%{sender_name} (%{sender_email}) sent you a contact message.'
+    new_match_email:
+      hi: Hallo
+      subject: Ein neues Match auf click to success.
+      content_html: <p>wir freuen uns dir mitzuteilen, dass es ein neues Match gibt. Die Suche auf click to success hat sich gelohnt.</p><p>Gehe auf <a href="https://www.c2su.de">www.c2su.de</a> und nehme direkt Kontakt auf.</p>
+      footer_html: Liebe Grüße,<br>Dein click to success Team
+    new_hunt_email:
+      hi: Hey
+      subject: Du wurdest auf click to success gehunted!!!
+      content_html: <p>dein Profile wurde von einem neuen Unternehmen geliked. Schau unter <a href="https://www.c2su.de">www.c2su.de</a> direkt nach, wer Interesse an dir hat und nimm Kontakt auf.</p><p>Wir freuen uns dich auf deinem Weg zu begleiten.</p>
+      footer_html: Beste Grüße,<br>Dein click to success Team
+    weekly_likes_report_email:
+      hi: Guten Morgen
+      subject: Neue Likes diese Woche auf click to success
+      content_html: <p>wir hoffen du hattest eine gute Woche.								Dein click to success Profil wurde %{likes_count} Mal in den letzten Tagen geliked.</p><p>Schau am besten direkt auf <a href="https://www.c2su.de">www.c2su.de</a> nach, welche neuen Bewerber dein Unternehmen gut fanden und trete in Kontakt.</p>
+      footer_html: Beste Grüße,<br>Dein click to success Team

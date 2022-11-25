@@ -1,0 +1,58 @@
+pipelines:
+  branches:
+    master:
+      - step:
+          image: banst/awscli
+          services:
+            - docker
+          caches:
+            - docker
+          script:
+            # Building project image
+            - export ECR_BASE=986756292145.dkr.ecr.eu-central-1.amazonaws.com
+            - export ECR=${ECR_BASE}/nextstep-backend
+            - export IMAGE_NAME="${ECR}:${BITBUCKET_BRANCH}"
+            - docker build -f k8s/Dockerfile -t ${IMAGE_NAME} .
+            - docker tag ${IMAGE_NAME} ${ECR}:${BITBUCKET_COMMIT}
+            - $(aws ecr get-login --no-include-email --registry-ids $AWS_ACCOUNT)
+            - docker push ${IMAGE_NAME}
+            - docker push ${ECR}:${BITBUCKET_COMMIT}
+            - docker build -f k8s/Dockerfile-sidekiq -t ${ECR_BASE}/nextstep-sidekiq:${BITBUCKET_BRANCH} .
+            - docker tag ${ECR_BASE}/nextstep-sidekiq:${BITBUCKET_BRANCH} ${ECR_BASE}/nextstep-sidekiq:${BITBUCKET_COMMIT}
+            - docker push ${ECR_BASE}/nextstep-sidekiq:${BITBUCKET_BRANCH}
+            - docker push ${ECR_BASE}/nextstep-sidekiq:${BITBUCKET_COMMIT}
+      - step:
+          name: Deploy to production
+          image: banst/awscli
+          trigger: manual
+          script:
+            - apk update && apk add openssh-client && apk add bash
+            - bash deploy/bitbucket-deploy.sh production
+    develop:
+      - step:
+          image: banst/awscli
+          services:
+            - docker
+          caches:
+            - docker
+          script:
+            # Building project image
+            - export ECR_BASE=986756292145.dkr.ecr.eu-central-1.amazonaws.com
+            - export ECR=${ECR_BASE}/nextstep-backend
+            - export IMAGE_NAME="${ECR}:${BITBUCKET_BRANCH}"
+            - docker build -f k8s/Dockerfile -t ${IMAGE_NAME} .
+            - docker tag ${IMAGE_NAME} ${ECR}:${BITBUCKET_COMMIT}
+            - $(aws ecr get-login --no-include-email --registry-ids $AWS_ACCOUNT)
+            - docker push ${IMAGE_NAME}
+            - docker push ${ECR}:${BITBUCKET_COMMIT}
+            - docker build -f k8s/Dockerfile-sidekiq -t ${ECR_BASE}/nextstep-sidekiq:${BITBUCKET_BRANCH} .
+            - docker tag ${ECR_BASE}/nextstep-sidekiq:${BITBUCKET_BRANCH} ${ECR_BASE}/nextstep-sidekiq:${BITBUCKET_COMMIT}
+            - docker push ${ECR_BASE}/nextstep-sidekiq:${BITBUCKET_BRANCH}
+            - docker push ${ECR_BASE}/nextstep-sidekiq:${BITBUCKET_COMMIT}
+      - step:
+          name: Deploy to production
+          image: banst/awscli
+          trigger: manual
+          script:
+            - apk update && apk add openssh-client && apk add bash
+            - bash deploy/bitbucket-deploy.sh

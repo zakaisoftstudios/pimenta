@@ -1,0 +1,51 @@
+<table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+  <tr>
+    <td>&nbsp;</td>
+    <td class="container">
+      <div class="content">
+          <h1><%= t('emails.weekly_likes_report_email.hi') %></h1>
+        <!-- START CENTERED WHITE CONTAINER -->
+        <span class="preheader"><%= t('emails.weekly_likes_report_email.subject') %>
+        </span>
+        <table role="presentation" class="main">
+
+          <!-- START MAIN CONTENT AREA -->
+          <tr>
+            <td class="wrapper">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td>
+                    <p><%= t('emails.weekly_likes_report_email.content_html', likes_count: @likes_count) %></p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+        <!-- END MAIN CONTENT AREA -->
+        </table>
+
+        <!-- START FOOTER -->
+        <div class="footer">
+          <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+            <!-- <tr>
+              <td class="content-block">
+                <span class="apple-link">Company Inc, 3 Abbey Road, San Francisco CA 94102</span>
+                <br> Don't like these emails? <a href="http://i.imgur.com/CScmqnj.gif">Unsubscribe</a>.
+              </td>
+            </tr> -->
+            <tr>
+              <td class="content-block powered-by">
+                  <%= t('emails.weekly_likes_report_email.footer_html') %>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- END FOOTER -->
+
+      <!-- END CENTERED WHITE CONTAINER -->
+      </div>
+    </td>
+    <td>&nbsp;</td>
+  </tr>
+</table>

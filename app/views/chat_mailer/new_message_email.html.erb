@@ -1,0 +1,23 @@
+<h1>
+  <%= t('new_message_email.hi', receiver_name: @receiver.profile.name) %>
+</h1>
+
+<p>
+  <%= t(
+    'new_message_email.main_message', 
+    sender_name: @sender.profile.name
+  ) %>
+</p>
+
+<p>
+  <%= t(
+    'new_message_email.message_content', 
+    message: @message
+  ) %>
+</p>
+
+<p>
+  <a href="<%= @front_end_link %>">
+    <%= t('new_message_email.link_text') %>
+  </a> 
+</p>

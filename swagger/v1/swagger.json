@@ -1,0 +1,1045 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NextStep API",
+    "version": "v1"
+  },
+  "basePath": "/v1",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+    }
+  },
+  "security": [
+    {
+      "Bearer": {
+      }
+    }
+  ],
+  "definitions": {
+    "auth": {
+      "type": "object",
+      "properties": {
+        "auth": {
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "email",
+            "password"
+          ]
+        }
+      },
+      "required": [
+        "auth"
+      ]
+    },
+    "jwt": {
+      "type": "object",
+      "properties": {
+        "jwt": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "jwt"
+      ]
+    },
+    "subject_like": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "subject_offer_id": {
+          "type": "integer"
+        },
+        "student_profile_id": {
+          "type": "integer"
+        },
+        "company_profile_id": {
+          "type": "integer"
+        },
+        "subject_offer": {
+          "type": "object"
+        }
+      }
+    },
+    "subject_like_subject_offer_id": {
+      "type": "object",
+      "properties": {
+        "subject_like": {
+          "type": "object",
+          "properties": {
+            "subject_offer_id": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "new_user": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            },
+            "password_confirmation": {
+              "type": "string"
+            },
+            "profile_type": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "email",
+            "password",
+            "password_confirmation",
+            "profile_type"
+          ]
+        },
+        "required": [
+          "user"
+        ]
+      }
+    },
+    "user": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "email": {
+          "type": "string"
+        },
+        "profile_type": {
+          "type": "string"
+        },
+        "jwt": {
+          "type": "string"
+        },
+        "profile": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "email",
+        "profile_type"
+      ]
+    },
+    
+    "new_company_profile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "contact_person": {
+          "type": "string"
+        },
+        "industry_sector": {
+          "type": "string"
+        },
+        "number_of_employees": {
+          "type": "integer"
+        },
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "we_are": {
+          "type": "string"
+        },
+        "why_we_do_it": {
+          "type": "string"
+        },
+        "why_should_you_study_here": {
+          "type": "string"
+        },
+        "special_features": {
+          "type": "string"
+        },
+        "subject_areas": {
+          "type": "string"
+        },
+        "partners": {
+          "type": "string"
+        },
+        "type_of_university": {
+          "type": "string"
+        },
+        "attachments_attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/attachment"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "contact_person",
+        "industry_sector",
+        "number_of_employees",
+        "country",
+        "city",
+        "street",
+        "we_are",
+        "why_we_do_it",
+        "why_should_you_study_here"
+      ]
+    },
+    "company_profile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "contact_person": {
+          "type": "string"
+        },
+        "industry_sector": {
+          "type": "string"
+        },
+        "number_of_employees": {
+          "type": "integer"
+        },
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "what_we_do": {
+          "type": "string"
+        },
+        "why_we_do_it": {
+          "type": "string"
+        },
+        "why_you_should_join_our_team": {
+          "type": "string"
+        },
+        "special_features": {
+          "type": "string"
+        },
+        "attachments_attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/attachment"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "contact_person",
+        "industry_sector",
+        "number_of_employees",
+        "country",
+        "city",
+        "street",
+        "what_we_do",
+        "why_we_do_it",
+        "why_you_should_join_our_team"
+      ]
+    },
+    "university_profile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "contact_person": {
+          "type": "string"
+        },
+        "industry_sector": {
+          "type": "string"
+        },
+        "number_of_employees": {
+          "type": "integer"
+        },
+        "country": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "we_are": {
+          "type": "string"
+        },
+        "why_we_do_it": {
+          "type": "string"
+        },
+        "why_should_you_study_here": {
+          "type": "string"
+        },
+        "special_features": {
+          "type": "string"
+        },
+        "subject_areas": {
+          "type": "string"
+        },
+        "partners": {
+          "type": "string"
+        },
+        "type_of_university": {
+          "type": "string"
+        },
+        "attachments_attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/attachment"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "contact_person",
+        "industry_sector",
+        "number_of_employees",
+        "country",
+        "city",
+        "street",
+        "we_are",
+        "why_we_do_it",
+        "why_should_you_study_here"
+      ]
+    },
+    "new_job_offer": {
+      "type": "object",
+      "properties": {
+        "job_offer": {
+          "type": "object",
+          "properties": {
+            "category": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            },
+            "what_is_expected_from_you": {
+              "type": "string"
+            },
+            "what_is_expected_from_us": {
+              "type": "string"
+            },
+            "tasks": {
+              "type": "string"
+            },
+            "perspectives": {
+              "type": "string"
+            },
+            "city": {
+              "type": "string"
+            },
+            "start": {
+              "type": "string"
+            },
+            "end_date": {
+              "type": "number"
+            },
+            "wage": {
+              "type": "number"
+            },
+            "free_places": {
+              "type": "integer"
+            },
+            "working_hours_per_week": {
+              "type": "integer"
+            },
+            "minimum_graduation": {
+              "type": "string"
+            },
+            "wage_period": {
+              "type": "string"
+            },
+            "attachments": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/attachment"
+              }
+            }
+          },
+          "required": [
+            "category",
+            "content",
+            "what_is_expected_from_you",
+            "what_is_expected_from_us",
+            "tasks",
+            "perspectives",
+            "city",
+            "start",
+            "wage",
+            "free_places",
+            "attachments"
+          ]
+        },
+        "required": [
+          "job_offer"
+        ]
+      }
+    },
+    "job_offer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "category": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "what_is_expected_from_you": {
+          "type": "string"
+        },
+        "what_is_expected_from_us": {
+          "type": "string"
+        },
+        "tasks": {
+          "type": "string"
+        },
+        "perspectives": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "start": {
+          "type": "string"
+        },
+        "end_date": {
+          "type": "number"
+        },
+        "wage": {
+          "type": "number"
+        },
+        "free_places": {
+          "type": "integer"
+        },
+        "working_hours_per_week": {
+          "type": "integer"
+        },
+        "minimum_graduation": {
+          "type": "string"
+        },
+        "wage_period": {
+          "type": "string"
+        },
+        "skills": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/skill"
+          }
+        },
+        "interests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/interest"
+          }
+        },
+        "strengths": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/strength"
+          }
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/attachment"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "category",
+        "content",
+        "what_we_expect_from_you",
+        "what_you_can_expect_from_us",
+        "what_we_need_from_you",
+        "city",
+        "start",
+        "wage",
+        "free_places",
+        "skills",
+        "interests",
+        "strengths",
+        "company_profile_id"
+      ]
+    },
+    "skill": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "label": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "value"
+      ]
+    },
+    "interest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "label": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "value"
+      ]
+    },
+    "strength": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "label": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "value"
+      ]
+    },
+    "attachment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "picture": {
+          "type": "string"
+        },
+        "video": {
+          "type": "string"
+        },
+        "purpose": {
+          "type": "string"
+        }
+      }
+    },
+    "error": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    }
+  },
+  "paths": {
+    "/company/profile/job_offers/{id}": {
+      "get": {
+        "summary": "Gets a job offer",
+        "tags": [
+          "Job Offers"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "job offer not found"
+          },
+          "401": {
+            "description": "unauthorized request"
+          },
+          "200": {
+            "description": "job offer returned",
+            "schema": {
+              "$ref": "#/definitions/job_offer"
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates a job offer",
+        "tags": [
+          "Job Offers"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "integer",
+            "required": true
+          },
+          {
+            "name": "job_offer",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/new_job_offer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "job offer updated",
+            "schema": {
+              "$ref": "#/definitions/job_offer"
+            }
+          },
+          "404": {
+            "description": "job offer not found"
+          },
+          "400": {
+            "description": "invalid request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "401": {
+            "description": "unauthorized request"
+          }
+        }
+      }
+    },
+    "/company/profile/job_offers": {
+      "get": {
+        "summary": "Gets all job offers from the current user",
+        "tags": [
+          "Job Offers"
+        ],
+        "responses": {
+          "200": {
+            "description": "job offers returned",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/job_offer"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a new job offer",
+        "tags": [
+          "Job Offers"
+        ],
+        "parameters": [
+          {
+            "name": "job_offer",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/new_job_offer"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "job offer created",
+            "schema": {
+              "$ref": "#/definitions/job_offer"
+            }
+          },
+          "400": {
+            "description": "invalid request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "401": {
+            "description": "unauthorized request"
+          }
+        }
+      }
+    },
+    "/company/profile": {
+      "get": {
+        "summary": "Gets the current user profile",
+        "tags": [
+          "Profiles"
+        ],
+        "responses": {
+          "401": {
+            "description": "unauthorized request"
+          },
+          "200": {
+            "description": "profile returned",
+            "schema": {
+              "$ref": "#/definitions/company_profile"
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates the current user profile",
+        "tags": [
+          "Profiles"
+        ],
+        "parameters": [
+          {
+            "name": "profile",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/new_company_profile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "profile updated",
+            "schema": {
+              "$ref": "#/definitions/company_profile"
+            }
+          },
+          "401": {
+            "description": "unauthorized request"
+          }
+        }
+      }
+    },
+    "/current_user": {
+      "get": {
+        "summary": "Gets the logged in user information",
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "user retrieved",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          },
+          "401": {
+            "description": "unauthorized request"
+          }
+        }
+      }
+    },
+    "/interests": {
+      "get": {
+        "summary": "Gets all interests",
+        "tags": [
+          "Interests"
+        ],
+        "responses": {
+          "200": {
+            "description": "interests returned",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/interest"
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized request"
+          }
+        }
+      }
+    },
+    "/pings": {
+      "get": {
+        "summary": "Checks if API is on",
+        "tags": [
+          "Ping"
+        ],
+        "security": [
+
+        ],
+        "responses": {
+          "200": {
+            "description": "API is on"
+          }
+        }
+      }
+    },
+    "/skills": {
+      "get": {
+        "summary": "Gets all skills",
+        "tags": [
+          "Skills"
+        ],
+        "responses": {
+          "200": {
+            "description": "skills returned",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/skill"
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized request"
+          }
+        }
+      }
+    },
+    "/strengths": {
+      "get": {
+        "summary": "Gets all strengths",
+        "tags": [
+          "Strengths"
+        ],
+        "responses": {
+          "200": {
+            "description": "strengths returned",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/strength"
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized request"
+          }
+        }
+      }
+    },
+    "/university/profile": {
+      "get": {
+        "summary": "Gets the current user profile",
+        "tags": [
+          "Profiles"
+        ],
+        "responses": {
+          "401": {
+            "description": "unauthorized request"
+          },
+          "200": {
+            "description": "profile returned",
+            "schema": {
+              "$ref": "#/definitions/university_profile"
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Updates the current user profile",
+        "tags": [
+          "Profiles"
+        ],
+        "parameters": [
+          {
+            "name": "profile",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/new_university_profile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "profile updated",
+            "schema": {
+              "$ref": "#/definitions/university_profile"
+            }
+          },
+          "401": {
+            "description": "unauthorized request"
+          }
+        }
+      }
+    },
+    "/user_token": {
+      "post": {
+        "summary": "Requests an access token for the given user",
+        "tags": [
+          "Auth"
+        ],
+        "security": [
+
+        ],
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/auth"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful authentication",
+            "schema": {
+              "$ref": "#/definitions/jwt"
+            }
+          },
+          "400": {
+            "description": "invalid credentials"
+          }
+        }
+      }
+    },
+    "/user_token": {
+      "post": {
+        "summary": "Requests an access token for the given user",
+        "tags": [
+          "Auth"
+        ],
+        "security": [
+
+        ],
+        "parameters": [
+          {
+            "name": "auth",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/auth"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "successful authentication",
+            "schema": {
+              "$ref": "#/definitions/jwt"
+            }
+          },
+          "400": {
+            "description": "invalid credentials"
+          }
+        }
+      }
+    },
+    "/subject_likes": {
+      "post": {
+        "summary": "Create Like for Company or Subject Profile",
+        "tags": [
+          "Subject Like"
+        ],
+        "parameters": [
+          {
+            "name": "subject_offer_id",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/subject_like_subject_offer_id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "subject like created",
+            "schema": {
+              "$ref": "#/definitions/subject_like"
+            }
+          }
+        }
+      }
+    },
+    "/subject_likes/{id}": {
+      "delete": {
+        "summary": "Create Like for Company or Subject Profile",
+        "tags": [
+          "Subject Like"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "subject like deleted"
+          }
+        }
+      }
+    }
+  }
+}
